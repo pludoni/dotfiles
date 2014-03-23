@@ -1,0 +1,39 @@
+[alias]
+	st = status -sb
+	ci = commit
+  requests = fetch origin +refs/merge-requests/*:refs/merge-requests/*
+  unpushed = log origin/master..HEAD
+  tree = log --graph --oneline --all
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
+  who = shortlog -s --
+  ll  = log --pretty=\"format:%Cred%h%Creset %s %Cgreen%an %Cblue%ar%Creset\" --no-merges
+	monsterpush = "!branch=`git rev-parse --abbrev-ref HEAD`; git push origin ${branch}:staging ${branch}:master"
+	monsterupdate = !git fetch origin && git merge origin/master && git merge origin/staging
+  railsupdate = "!git pull origin master && bundle && rake db:migrate && rake db:test:prepare"
+  overview = log --pretty=oneline --abbrev-commit --graph --decorate --all --simplify-by-decoration
+  rspec = "!bundle exec rspec `git ls-files spec -m`"
+	today = log --since=midnight --author='Stefan Wienert' --oneline
+	g = grep --break --heading --line-number
+
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = 1
+[user]
+	name = Stefan Wienert
+	email = stefan.wienert@pludoni.de
+[github]
+	user = zealot128
+	token = ac7e578e9f0110b789f27f0a9daab759
+	name = Admin
+	email = admin@pludoni.de
+[core]
+	excludesfile = ~/.gitignore
+[grep]
+	lineNumber = true
+	extendRegexp = true
+[push]
+	default = simple
