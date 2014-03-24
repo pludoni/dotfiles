@@ -112,7 +112,7 @@ export EDITOR=vim
 #PS1='\[\033[33m\]\w\n\u@\h\$\[\033[39m\] '
 #PS1='--- \[\033[36m\]\w\n\[\033[33m\]\u@\h$\[\033[39m\] '
 
-. ~/.completion/load.sh
+# . ~/.completion/load.sh
 
 export LANG="de_DE.UTF-8"
 export LC_CTYPE="de_DE.UTF-8"
@@ -127,7 +127,6 @@ export TERM='screen-256color'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-export RUBY_HEAP_MIN_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
