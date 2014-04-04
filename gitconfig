@@ -4,7 +4,8 @@
   requests = fetch origin +refs/merge-requests/*:refs/merge-requests/*
   unpushed = log origin/master..HEAD
   tree = log --graph --oneline --all
-  lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
+  loll = log --pretty=oneline --abbrev-commit --graph --decorate --all
+  lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   who = shortlog -s --
   ll  = log --pretty=\"format:%Cred%h%Creset %s %Cgreen%an %Cblue%ar%Creset\" --no-merges
 	monsterpush = "!branch=`git rev-parse --abbrev-ref HEAD`; git push origin ${branch}:staging ${branch}:master"
