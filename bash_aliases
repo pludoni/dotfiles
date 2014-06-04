@@ -26,3 +26,6 @@ function port() {
   cat /etc/nginx/nginx.rb | grep ${1}.swi | egrep -o '[0-9]+'
 }
 alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments +answer"
+alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
+
+alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
