@@ -29,3 +29,6 @@ alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments 
 alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
 
 alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
+alias v=vim
+alias vi=vim
+
