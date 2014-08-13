@@ -124,6 +124,7 @@ export LC_COLLATE="de_DE.UTF-8"
 
 #activate 256 colors
 export TERM='screen-256color'
+export TERM='xterm-256color'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
