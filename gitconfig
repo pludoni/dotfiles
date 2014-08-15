@@ -36,5 +36,3 @@
 [grep]
 	lineNumber = true
 	extendRegexp = true
-[push]
-	default = simple
