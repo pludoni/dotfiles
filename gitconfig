@@ -15,6 +15,7 @@
   rspec = "!bundle exec rspec `git ls-files spec -m`"
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
+  rm-merged = !git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
 
 
 [color]
@@ -23,16 +24,17 @@
 	interactive = auto
 	status = auto
 	ui = 1
+
 [user]
 	name = Stefan Wienert
 	email = stefan.wienert@pludoni.de
+
 [github]
 	user = zealot128
-	token = ac7e578e9f0110b789f27f0a9daab759
-	name = Admin
-	email = admin@pludoni.de
+
 [core]
 	excludesfile = ~/.gitignore
+
 [grep]
 	lineNumber = true
 	extendRegexp = true
