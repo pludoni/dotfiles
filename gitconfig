@@ -1,6 +1,7 @@
 [alias]
 	st = status -sb
 	ci = commit
+	co = checkout
   requests = fetch origin +refs/merge-requests/*:refs/merge-requests/*
   unpushed = log origin/master..HEAD
   tree = log --graph --oneline --all
@@ -15,7 +16,7 @@
   rspec = "!bundle exec rspec `git ls-files spec -m`"
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
-  rm-merged = !git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
+  rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
 
 
 [color]
