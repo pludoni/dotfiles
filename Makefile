@@ -13,22 +13,9 @@ rebuild_zsh_completion:
 	rm -f ~/.zcompdump
 	compinit
 
-
 zsh:
 	curl -L https://github.com/pludoni/oh-my-zsh/raw/master/tools/install.sh | sh
 
-vim:
-	\curl -L https://raw.github.com/zealot128/vimfiles2/master/install.sh | bash
-
-ubuntu:
-	sudo apt-get install curl git-core vim zsh tmux
-
-ruby:
-	\curl -sSL https://get.rvm.io | bash -s stable
-
-node:
-	sudo apt-get install python-software-properties python g++ make
-	sudo add-apt-repository ppa:chris-lea/node.js
-	sudo apt-get update --yes
-	sudo apt-get install nodejs
-	sudo npm install -g cordova
+tmux:
+	mkdir -p ~/.tmux
+	git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/tmux-resurrect

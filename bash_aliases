@@ -17,6 +17,10 @@ then
   alias dns-reload='sudo killall -HUP mDNSResponder'
   alias stop-sleep='echo "Stopping computer from going into sleep, stop with ctrl+c" && pmset noidle'
   alias pg-reload='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist && launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+
+  function ffmpeg-screencast() {
+    ffmpeg -r 30 -f avfoundation -capture_cursor 1 -capture_mouse_clicks 1 -i "1:0" $1
+  }
 fi
 
 
@@ -32,5 +36,13 @@ function ffprobe-json() {
 }
 
 
+
 alias tracking-start='while true; do ~/bin/thyme track -o ~/.thyme.json; sleep 30s; done;'
 alias tracking-show='~/bin/thyme show -i ~/.thyme.json -w stats > ~/.thyme.html && open ~/.thyme.html'
+alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
+
+alias ssh-agent-start='eval `ssh-agent` && ssh-add -t3600'
+alias v=vim
+alias vi=vim
+
+
