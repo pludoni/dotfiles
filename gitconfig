@@ -15,6 +15,8 @@
   rspec = "!bundle exec rspec `git ls-files spec -m`"
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
+  rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
+  fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
 
 
 [color]
@@ -25,16 +27,21 @@
 	ui = 1
 [user]
 	name = Stefan Wienert
-	email = stefan.wienert@pludoni.de
+	email = info@stefanwienert.de
 [github]
 	user = zealot128
 	token = ac7e578e9f0110b789f27f0a9daab759
 	name = Admin
 	email = admin@pludoni.de
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/stefan/.gitignore
 [grep]
 	lineNumber = true
 	extendRegexp = true
 [push]
 	default = matching
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[commit]
+	gpgsign = true
