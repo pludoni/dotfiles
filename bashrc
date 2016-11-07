@@ -2,16 +2,8 @@
 export PS1='\h:\w\$ '
 umask 022
 # You may uncomment the following lines if you want `ls' to be colorized:
-export LS_OPTIONS='--color=auto'
-eval "`dircolors`"
-alias ls='ls $LS_OPTIONS'
-alias ll='ls $LS_OPTIONS -l'
-alias l='ls $LS_OPTIONS -lA'
-
-# Some more alias to avoid making mistakes:
- alias rm='rm -i'
- alias cp='cp -i'
- alias mv='mv -i'
+alias ll='ls -l'
+alias l='ls -lA'
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -126,9 +118,14 @@ export LC_COLLATE="de_DE.UTF-8"
 export TERM='screen-256color'
 export TERM='xterm-256color'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
+
+# added by travis gem
+[ -f /Users/stefan/.travis/travis.sh ] && source /Users/stefan/.travis/travis.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

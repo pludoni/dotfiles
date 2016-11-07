@@ -1,13 +1,4 @@
-setup_linux:
-	cd /tmp
-	wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.1-2_all.deb
-	sudo dpkg -i rcm_1.2.1-2_all.deb
-	rm rcm_1.2.1-2_all.deb
-	cd ~/.dotfiles
-	rcup
-
-setup:
-	rcup
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 
 rebuild_zsh_completion:
 	rm -f ~/.zcompdump
@@ -19,3 +10,16 @@ zsh:
 tmux:
 	mkdir -p ~/.tmux
 	git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/tmux-resurrect
+
+link:
+	-ln -fs ${CURDIR}/gitconfig ~/.gitconfig
+	-ln -fs ${CURDIR}/gitignore ~/.gitignore
+	-ln -fs ${CURDIR}/wgetrc ~/.wgetrc
+	-ln -fs ${CURDIR}/bash_aliases ~/.bash_aliases
+	# -ln -fs ${CURDIR}/bashrc ~/.bashrc
+	-ln -fs ${CURDIR}/tmux.conf ~/.tmux.conf
+
+vimfiles:
+	\curl -L https://raw.github.com/zealot128/vimfiles2/master/install.sh | bash
+
+all: link tmux zsh
