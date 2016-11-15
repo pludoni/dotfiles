@@ -15,6 +15,7 @@ tap 'mattisg/mattisg'
 cask 'java'
 cask 'xquartz'
 brew 'android-sdk'
+brew 'md5sha1sum'
 brew 'autoconf'
 brew 'readline'
 brew 'bash'
@@ -113,7 +114,6 @@ cask 'quicklook-json'
 cask 'scroll-reverser'
 cask 'shiftit'
 cask 'skype'
-cask 'slack'
 cask 'steam'
 cask 'sublime-text'
 cask 'suspicious-package'
@@ -122,9 +122,10 @@ cask 'the-unarchiver'
 cask 'thunderbird'
 cask 'vagrant'
 cask 'virtualbox'
-cask 'viscosity'
+cask 'viscosity' # OpenVPN
 cask 'vlc'
 cask 'webpquicklook'
+cask "cheatsheet" # Hold CMD in any app for 3 seconds to display all hotkeys
 mas 'Microsoft Remote Desktop', id: 715768417
 mas 'PDFScanner', id: 410968114
 mas 'Pixelmator', id: 407963104
