@@ -25,7 +25,8 @@ fi
 
 
 function ffmpeg-mp4-hd() {
-  ffmpeg -i $1 -preset veryfast -c:v libx264 -profile:v main -level 4 -c:a libfaac -q:a 100 -crf 25 -map_metadata 0 encoded_$1
+  # libfaac maybe
+  ffmpeg -i $1 -preset veryfast -c:v libx264 -profile:v main -level 4 -c:a libfdk_aac -q:a 100 -crf 25 -map_metadata 0 encoded_$1
   echo "Before:"
   du -h $1
   echo "After:"

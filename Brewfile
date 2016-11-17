@@ -36,6 +36,7 @@ brew 'libpng'
 brew 'freetype'
 brew 'gdbm'
 brew 'gnu-sed', args: ['with-default-names']
+brew 'ffmpeg', args: ['with-fdk-aac']
 brew 'libusb'
 brew 'pkg-config'
 brew 'libusb-compat'
