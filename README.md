@@ -30,3 +30,9 @@ make vimfiles
 ```
 make zsh
 ```
+
+## 5. When on OSX:
+
+```
+brew bundle  --file="~/.dotfiles/Brewfile"
+```
