@@ -47,3 +47,6 @@ alias v=vim
 alias vi=vim
 
 
+function bundle-grep () {
+  ag "$@" `bundle show --paths`
+}
