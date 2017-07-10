@@ -58,3 +58,6 @@ function gem-cd() {
 # if type nvim > /dev/null 2>&1; then
 #   alias vim='nvim'
 # fi
+function bundle-grep () {
+  ag "$@" `bundle show --paths`
+}
