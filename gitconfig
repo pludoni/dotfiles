@@ -30,7 +30,8 @@
 
 [user]
 	name = Stefan Wienert
-	email = stefan.wienert@pludoni.de
+	email = info@stefanwienert.de
+	signingkey = C29FE67F
 
 [github]
 	user = zealot128
@@ -43,3 +44,10 @@
 	extendRegexp = true
 [push]
 	default = matching
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+; [commit]
+; 	gpgsign = true
+; [gpg]
+; 	program = gpg1

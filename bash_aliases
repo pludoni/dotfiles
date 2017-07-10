@@ -1,35 +1,48 @@
-function plcd {
-  cd `pl cd $@`
-}
-
-function plgoto {
-  cd `pl goto $@`
-}
-
 alias b="bundle exec"
-alias s="spring"
-alias gr='cd `git root`'
-
-alias hoursweek="/opt/bugtracker/script/runner -e production 'puts TimeEntry.find(:all, :conditions => [\"spent_on > ? and user_id = 1\", 7.days.ago]).sum{|i| i.hours}' 2> /dev/null"
-alias php-codesmells="phpcs -n --standard=Drupal --report=summary --severity=5 --extensions=php,inc,module . | sort +1 -2 -nr | grep -v phpmailer | grep -v class.smtp | head"
-
 
 alias dusch="du -sch * | egrep '[MG]'"
 alias git-unpushed="git log origin/master..HEAD"
 
 export EDITOR="vim"
 alias ta="tmux attach"
-alias stundenzettel=' git log --committer="`git config --get user.name`" --since="$(ruby -e "require \"date\";puts Date.new((d=Date.today-30).year,d.month,20)")"  --pretty=format:"%C(white)%h %C(yellow)%ad%C(reset) %s %b" --date=short --stat  '
-
 alias ctags-refresh='ctags --extra=+f -f .tags --languages=Ruby --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*'
-
-function port() {
-  cat /etc/nginx/nginx.rb | grep ${1}.swi | egrep -o '[0-9]+'
-}
 alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments +answer"
+alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
+alias v=nvim
+alias vi=nvim
+
+uname -a | grep "Darwin" > /dev/null
+if [ $? -eq 0 ]
+then
+  alias dns-reload='sudo killall -HUP mDNSResponder'
+  alias stop-sleep='echo "Stopping computer from going into sleep, stop with ctrl+c" && pmset noidle'
+  alias pg-reload='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist && launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
+
+  function ffmpeg-screencast() {
+    ffmpeg -r 30 -f avfoundation -capture_cursor 1 -capture_mouse_clicks 1 -i "1:0" $1
+  }
+fi
+
+
+function ffmpeg-mp4-hd() {
+  # libfaac maybe
+  ffmpeg -i $1 -preset veryfast -c:v libx264 -profile:v main -level 4 -c:a libfdk_aac -q:a 100 -crf 25 -map_metadata 0 encoded_$1
+  echo "Before:"
+  du -h $1
+  echo "After:"
+  du -h encoded_$1
+}
+function ffprobe-json() {
+  ffprobe -show_format -print_format json $1 2> /dev/null
+}
+
+
+
+alias tracking-start='while true; do ~/bin/thyme track -o ~/.thyme.json; sleep 30s; done;'
+alias tracking-show='~/bin/thyme show -i ~/.thyme.json -w stats > ~/.thyme.html && open ~/.thyme.html'
 alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
 
-alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
+alias ssh-agent-start='eval `ssh-agent` && ssh-add -t3600'
 alias v=vim
 alias vi=vim
 
