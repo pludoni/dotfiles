@@ -17,6 +17,8 @@
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
   rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
+  fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
+	root = rev-parse --show-toplevel
 
 
 [color]
