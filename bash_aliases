@@ -3,13 +3,14 @@ alias b="bundle exec"
 alias dusch="du -sch * | egrep '[MG]'"
 alias git-unpushed="git log origin/master..HEAD"
 
-export EDITOR="vim"
+export EDITOR="nvim"
 alias ta="tmux attach"
 alias ctags-refresh='ctags --extra=+f -f .tags --languages=Ruby --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*'
 alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments +answer"
 alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
 alias v=nvim
 alias vi=nvim
+alias R='nocorrect b rspec'
 
 uname -a | grep "Darwin" > /dev/null
 if [ $? -eq 0 ]

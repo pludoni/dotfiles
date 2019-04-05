@@ -99,8 +99,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-export SVN_EDITOR=vim
-export EDITOR=vim
+export SVN_EDITOR=nvim
+export EDITOR=nvim
 #PS1='\[\033[33m\]\w\n\u@\h\$\[\033[39m\] '
 #PS1='--- \[\033[36m\]\w\n\[\033[33m\]\u@\h$\[\033[39m\] '
 

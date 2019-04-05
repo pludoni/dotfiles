@@ -13,13 +13,15 @@
 	monsterupdate = !git fetch origin && git merge origin/master && git merge origin/staging
   railsupdate = "!git pull origin master && bundle && rake db:migrate && rake db:test:prepare"
   overview = log --pretty=oneline --abbrev-commit --graph --decorate --all --simplify-by-decoration
-  rspec = "!bundle exec rspec `git ls-files spec -m`"
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
   rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
   fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
 	root = rev-parse --show-toplevel
-
+  uncommited = "!vim `git diff --name-only`"
+  rspec-changed = "!bundle exec rspec `git ls-files spec -m`"
+  rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
+  tidyup = "!git gc && git remote prune origin && git rm-merged"
 
 [color]
 	branch = auto
