@@ -53,3 +53,16 @@
 ; 	gpgsign = true
 ; [gpg]
 ; 	program = gpg1
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[mergetool]
+  prompt = true
+	keepBackup = false
+[merge]
+	tool = vimdiff
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
