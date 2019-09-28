@@ -11,6 +11,14 @@ alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
 alias v=nvim
 alias vi=nvim
 alias R='nocorrect b rspec'
+alias gaump='git add -u && git commit && git push'
+
+rg=$(which rg)
+if [ -x "$rg" ] ; then
+  alias ag='rg'
+  alias ack='rg'
+fi
+
 
 uname -a | grep "Darwin" > /dev/null
 if [ $? -eq 0 ]
@@ -43,7 +51,7 @@ alias tracking-start='while true; do ~/bin/thyme track -o ~/.thyme.json; sleep 3
 alias tracking-show='~/bin/thyme show -i ~/.thyme.json -w stats > ~/.thyme.html && open ~/.thyme.html'
 alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
 
-alias ssh-agent-start='eval `ssh-agent` && ssh-add -t3600'
+alias ssh-agent-add-day='ssh-add -t 28800 ~/.ssh/id_rsa'
 alias v=vim
 alias vi=vim
 
@@ -51,6 +59,17 @@ function rubocop-autocorrect-safe() {
   cops="Style/AlignArray,Style/BracesAroundHashParameters,Style/ClosingParenthesisIndentation,Style/DefWithParentheses,Style/EmptyLineAfterMagicComment,Style/EmptyLineBetweenDefs,Style/EmptyLines,Style/EmptyLinesAroundAccessModifier,Style/EmptyLinesAroundBlockBody,Style/EmptyLinesAroundClassBody,Style/EmptyLinesAroundExceptionHandlingKeywords,Style/EmptyLinesAroundMethodBody,Style/EmptyLinesAroundModuleBody,Style/ExtraSpacing,Style/HashSyntax,Style/IndentAssignment,Style/IndentationWidth,Style/Lambda,Style/LeadingCommentSpace,Style/MethodDefParentheses,Style/MultilineBlockLayout,Style/MultilineHashBraceLayout,Style/MultilineMethodCallBraceLayout,Style/SpaceAfterColon,Style/SpaceAfterComma,Style/SpaceAroundEqualsInParameterDefault,Style/SpaceAroundKeyword,Style/SpaceAroundOperators,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeComma,Style/SpaceInsideBlockBraces,Style/SpaceInsideBrackets,Style/SpaceInsideHashLiteralBraces,Style/SpaceInsideParens,Style/TrailingBlankLines,Style/TrailingWhitespace"
   rubocop -a --only $cops
 }
+
+function ram-killers() {
+  ps -eo pmem,rss,user,pid,cmd | sort -k 1 -nr | egrep '(node|ruby|chrome|firefox)' | head -n 10
+}
+
+alias unlock-agent-1d='ssh-add -t 28800 ~/.ssh/id_rsa'
+alias rebase-continue='git add -u && git rebase --continue'
+alias R='nocorrect b spring rspec'
+alias Rnf='nocorrect b spring rspec --next-failure'
+alias Rof='nocorrect b spring rspec --only-failures'
+alias gau='git add -u'
 
 
 function gem-cd() {
