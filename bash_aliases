@@ -3,13 +3,14 @@ alias b="bundle exec"
 alias dusch="du -sch * | egrep '[MG]'"
 alias git-unpushed="git log origin/master..HEAD"
 
-export EDITOR="vim"
+export EDITOR="nvim"
 alias ta="tmux attach"
 alias ctags-refresh='ctags --extra=+f -f .tags --languages=Ruby --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*'
 alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments +answer"
 alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
 alias v=nvim
 alias vi=nvim
+alias R='nocorrect b rspec'
 
 uname -a | grep "Darwin" > /dev/null
 if [ $? -eq 0 ]
@@ -62,7 +63,18 @@ alias ssh-agent-start='eval `ssh-agent` && ssh-add -t3600'
 alias v=vim
 alias vi=vim
 
+function rubocop-autocorrect-safe() {
+  cops="Style/AlignArray,Style/BracesAroundHashParameters,Style/ClosingParenthesisIndentation,Style/DefWithParentheses,Style/EmptyLineAfterMagicComment,Style/EmptyLineBetweenDefs,Style/EmptyLines,Style/EmptyLinesAroundAccessModifier,Style/EmptyLinesAroundBlockBody,Style/EmptyLinesAroundClassBody,Style/EmptyLinesAroundExceptionHandlingKeywords,Style/EmptyLinesAroundMethodBody,Style/EmptyLinesAroundModuleBody,Style/ExtraSpacing,Style/HashSyntax,Style/IndentAssignment,Style/IndentationWidth,Style/Lambda,Style/LeadingCommentSpace,Style/MethodDefParentheses,Style/MultilineBlockLayout,Style/MultilineHashBraceLayout,Style/MultilineMethodCallBraceLayout,Style/SpaceAfterColon,Style/SpaceAfterComma,Style/SpaceAroundEqualsInParameterDefault,Style/SpaceAroundKeyword,Style/SpaceAroundOperators,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeComma,Style/SpaceInsideBlockBraces,Style/SpaceInsideBrackets,Style/SpaceInsideHashLiteralBraces,Style/SpaceInsideParens,Style/TrailingBlankLines,Style/TrailingWhitespace"
+  rubocop -a --only $cops
+}
 
+
+function gem-cd() {
+  cd `bundle show $1`
+}
+# if type nvim > /dev/null 2>&1; then
+#   alias vim='nvim'
+# fi
 function bundle-grep () {
   ag "$@" `bundle show --paths`
 }
