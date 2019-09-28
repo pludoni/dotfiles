@@ -32,6 +32,22 @@ function ffmpeg-mp4-hd() {
   echo "After:"
   du -h encoded_$1
 }
+function ffmpeg-mp4-720() {
+  # libfaac maybe
+  ffmpeg -i $1 -preset veryfast -vf scale=-1:720 -c:v libx264 -profile:v main -level 4 -c:a libfdk_aac -q:a 100 -crf 25 -map_metadata 0 encoded_$1
+  echo "Before:"
+  du -h $1
+  echo "After:"
+  du -h encoded_$1
+}
+function ffmpeg-mp4-480() {
+  # libfaac maybe
+  ffmpeg -i $1 -preset veryfast -vf scale=-2:480 -c:v libx264 -c:a libfdk_aac -q:a 100 -crf 25 -map_metadata 0 encoded_$1
+  echo "Before:"
+  du -h $1
+  echo "After:"
+  du -h encoded_$1
+}
 function ffprobe-json() {
   ffprobe -show_format -print_format json $1 2> /dev/null
 }

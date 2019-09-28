@@ -18,6 +18,11 @@
 	g = grep --break --heading --line-number
   rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
   fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
+	cane = commit --amend --no-edit
+	last = log -1 HEAD
+	pr = pull --rebase
+  rebase-continue = "!git add -u && git rebase --continue"
+  acp = "!git add -u && git commit && git push"
 
 
 [color]
@@ -50,3 +55,5 @@
 ; 	gpgsign = true
 ; [gpg]
 ; 	program = gpg1
+[gpg]
+	program = gpg
