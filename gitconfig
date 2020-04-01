@@ -27,6 +27,10 @@
   rspec-changed = "!bundle exec rspec `git ls-files spec -m`"
   rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
   tidyup = "!git gc && git remote prune origin && git rm-merged"
+  force-push-current = "!git push --force-with-lease origin \"$(git rev-parse --abbrev-ref HEAD)\""
+  branch-age = "!git for-each-ref --format='%(align:15,left)%(committerdate:relative)%(end) |  %(refname)' --sort -committerdate | sed 's/refs\\/\\(remotes\\|heads\\)\\///'"
+  b = "!git branch --all --sort=-committerdate --format='%(HEAD) %(align:18,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) - %(authorname))'"
+  addam = "!git add -u && git commit --amend"
   big-commits ="!git rev-list --objects --all \
     |git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
     |sed -n 's/^blob //p' \
@@ -77,6 +81,7 @@
 	keepBackup = false
 [merge]
 	tool = vimdiff
+	ff = only
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [http]
