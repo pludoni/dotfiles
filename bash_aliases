@@ -86,7 +86,15 @@ alias R='nocorrect b spring rspec'
 alias Rnf='nocorrect b spring rspec --next-failure'
 alias Rof='nocorrect b spring rspec --only-failures'
 alias gau='git add -u'
+alias S='bin/spring'
+alias Smigrate='bin/spring rake db:migrate'
+alias Srollback='bin/spring rake db:rollback'
+alias Sgenerate='bin/spring rails g'
+alias Sr='bin/spring rails'
 
+function Secupdate() {
+  bundle update $1 --conservative && git add Gemfile.lock && git commit -m "SecFix: $1" && git push
+}
 
 function gem-cd() {
   cd `bundle show $1`
