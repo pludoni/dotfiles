@@ -18,6 +18,7 @@ link:
 	-ln -fs ${CURDIR}/bash_aliases ~/.bash_aliases
 	# -ln -fs ${CURDIR}/bashrc ~/.bashrc
 	-ln -fs ${CURDIR}/tmux.conf ~/.tmux.conf
+	-ln -fs ${CURDIR}/railsrc ~/.railsrc
 
 vimfiles:
 	\curl -L https://raw.github.com/zealot128/vimfiles2/master/install.sh | bash

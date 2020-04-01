@@ -1,0 +1,11 @@
+--database=postgresql
+--skip-action-cable
+--skip-action-mailbox
+--skip-action-text
+--skip-bundle
+--skip-keeps
+--skip-sprockets
+--skip-test-unit
+--skip-turbolinks
+--webpack=vue
+
