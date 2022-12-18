@@ -31,6 +31,7 @@
   rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
   tidyup = "!git gc && git remote prune origin && git rm-merged"
   rls = remote -v
+  find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
   force-push-current = "!git push --force-with-lease origin \"$(git rev-parse --abbrev-ref HEAD)\""
   branch-age = "!git for-each-ref --format='%(align:15,left)%(committerdate:relative)%(end) |  %(refname)' --sort -committerdate | sed 's/refs\\/\\(remotes\\|heads\\)\\///'"
   b = "!git branch --all --sort=-committerdate --format='%(HEAD) %(align:18,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) - %(authorname))'"
@@ -54,7 +55,7 @@
 [user]
 	name = Stefan Wienert
 	email = info@stefanwienert.de
-	signingkey = C29FE67F
+	;signingkey = C29FE67F
 
 [github]
 	user = zealot128
@@ -70,12 +71,12 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-; [commit]
-; 	gpgsign = true
+[commit]
+;  gpgsign = true
 ; [gpg]
 ; 	program = gpg1
 [gpg]
-	program = gpg
+ 	program = gpg
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
