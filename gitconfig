@@ -15,22 +15,28 @@
   overview = log --pretty=oneline --abbrev-commit --graph --decorate --all --simplify-by-decoration
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
+  todos = "!rg TODO `git  diff  --name-only -GTODO origin/master`"
   rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
   fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
 	cane = commit --amend --no-edit
 	last = log -1 HEAD
 	pr = pull --rebase
+  dz = diff --color-moved=dimmed-zebra
+  prp = !git pull --rebase && git push
   rebase-continue = "!git add -u && git rebase --continue"
   acp = "!git add -u && git commit && git push"
 	root = rev-parse --show-toplevel
-  uncommited = "!vim `git diff --name-only`"
+  uncommited = "!nvim `git diff --name-only`"
   rspec-changed = "!bundle exec rspec `git ls-files spec -m`"
   rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
   tidyup = "!git gc && git remote prune origin && git rm-merged"
+  rls = remote -v
   force-push-current = "!git push --force-with-lease origin \"$(git rev-parse --abbrev-ref HEAD)\""
   branch-age = "!git for-each-ref --format='%(align:15,left)%(committerdate:relative)%(end) |  %(refname)' --sort -committerdate | sed 's/refs\\/\\(remotes\\|heads\\)\\///'"
   b = "!git branch --all --sort=-committerdate --format='%(HEAD) %(align:18,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) - %(authorname))'"
   addam = "!git add -u && git commit --amend"
+  testfix = "!git add -u && git commit -m Testfix && git push"
+  quickfix = "!git add -u && git commit -m Quickfix && git push"
   big-commits ="!git rev-list --objects --all \
     |git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
     |sed -n 's/^blob //p' \
@@ -78,11 +84,15 @@
 
 [mergetool]
   prompt = true
-	keepBackup = false
+  keepBackup = false
 [merge]
-	tool = vimdiff
-	ff = only
+  tool = vimdiff
+  ff = only
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [http]
 	postBuffer = 524288000
+[rebase]
+	instructionFormat = " %s (%an)"
+[rerere]
+	enabled = true
