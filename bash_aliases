@@ -10,8 +10,11 @@ alias shortdig="dig ANY  +nocl +recurse +nocmd +nostats +noquestion +nocomments 
 alias ssh-agent-start='eval `ssh-agent` && ssh-add -t600'
 alias v=nvim
 alias vi=nvim
+alias vim=nvim
 alias R='nocorrect b rspec'
 alias gaump='git add -u && git commit && git push'
+alias gca='git commit --amend --no-edit'
+alias diff='diff --color -u'
 
 rg=$(which rg)
 if [ -x "$rg" ] ; then
@@ -68,8 +71,6 @@ alias tracking-show='~/bin/thyme show -i ~/.thyme.json -w stats > ~/.thyme.html 
 alias tmux-clear-all='tmux list-windows -t CRM|grep -v vim|cut -d: -f1|xargs -I{} tmux send-keys -t CRM:{} C-l '
 
 alias ssh-agent-add-day='ssh-add -t 28800 ~/.ssh/id_rsa'
-alias v=vim
-alias vi=vim
 
 function rubocop-autocorrect-safe() {
   cops="Style/AlignArray,Style/BracesAroundHashParameters,Style/ClosingParenthesisIndentation,Style/DefWithParentheses,Style/EmptyLineAfterMagicComment,Style/EmptyLineBetweenDefs,Style/EmptyLines,Style/EmptyLinesAroundAccessModifier,Style/EmptyLinesAroundBlockBody,Style/EmptyLinesAroundClassBody,Style/EmptyLinesAroundExceptionHandlingKeywords,Style/EmptyLinesAroundMethodBody,Style/EmptyLinesAroundModuleBody,Style/ExtraSpacing,Style/HashSyntax,Style/IndentAssignment,Style/IndentationWidth,Style/Lambda,Style/LeadingCommentSpace,Style/MethodDefParentheses,Style/MultilineBlockLayout,Style/MultilineHashBraceLayout,Style/MultilineMethodCallBraceLayout,Style/SpaceAfterColon,Style/SpaceAfterComma,Style/SpaceAroundEqualsInParameterDefault,Style/SpaceAroundKeyword,Style/SpaceAroundOperators,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeBlockBraces,Style/SpaceBeforeComma,Style/SpaceInsideBlockBraces,Style/SpaceInsideBrackets,Style/SpaceInsideHashLiteralBraces,Style/SpaceInsideParens,Style/TrailingBlankLines,Style/TrailingWhitespace"
@@ -82,18 +83,63 @@ function ram-killers() {
 
 alias unlock-agent-1d='ssh-add -t 28800 ~/.ssh/id_rsa'
 alias rebase-continue='git add -u && git rebase --continue'
-alias R='nocorrect b spring rspec'
-alias Rnf='nocorrect b spring rspec --next-failure'
-alias Rof='nocorrect b spring rspec --only-failures'
+function R() {
+  if [ -f bin/spring ]
+  then
+    nocorrect bin/spring rspec "$@"
+  else
+    bundle exec rspec "$@"
+  fi
+}
+function Rnf() {
+  if [ -f bin/spring ]
+  then
+    nocorrect bin/spring rspec --next-failure "$@"
+  else
+    bundle exec rspec --next-failure "$@"
+  fi
+}
+function Rof() {
+  if [ -f bin/spring ]
+  then
+    nocorrect bin/spring rspec --only-failures "$@"
+  else
+    bundle exec  rspec --only-failures "$@"
+  fi
+}
+function Rmig() {
+  if [ -f bin/spring ]
+  then
+    nocorrect bin/spring rake db:migrate "$@"
+  else
+    bundle exec rails db:migrate "$@"
+  fi
+}
+function Rrollback() {
+  if [ -f bin/spring ]
+  then
+    nocorrect bin/spring rake db:rollback
+  else
+    bundle exec rails db:rollback
+  fi
+}
 alias gau='git add -u'
 alias S='bin/spring'
 alias Smigrate='bin/spring rake db:migrate'
 alias Srollback='bin/spring rake db:rollback'
 alias Sgenerate='bin/spring rails g'
+alias Sconsole='bin/spring rails c'
+alias Sannotate='bin/spring rake annotate_models'
 alias Sr='bin/spring rails'
 
 function Secupdate() {
-  bundle update $1 --conservative && git add Gemfile.lock && git commit -m "SecFix: $1" && git push
+  # if first argument is rails
+  if [ "$1" = "rails" ]
+  then
+    bundle update "$@" && git add Gemfile.lock && git commit -m "SecFix: $*" && git push
+  else
+    bundle update "$@" --conservative && git add Gemfile.lock && git commit -m "SecFix: $*" && git push
+  fi
 }
 
 function gem-cd() {
@@ -105,3 +151,6 @@ function gem-cd() {
 function bundle-grep () {
   ag "$@" `bundle show --paths`
 }
+alias T='~/Projects/gems/extract_i18n/exe/extract-i18n -l de'
+alias Tjs='~/Projects/gems/extract_i18n/exe/extract-i18n -l de -n js'
+alias Tfix='bundle exec i18n-tasks normalize -p && bundle exec i18n-tasks translate-missing -f de -l en'
