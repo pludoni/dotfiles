@@ -132,6 +132,8 @@ alias Sconsole='bin/spring rails c'
 alias Sannotate='bin/spring rake annotate_models'
 alias Sr='bin/spring rails'
 
+alias ap='ansible-playbook'
+
 function Secupdate() {
   # if first argument is rails
   if [ "$1" = "rails" ]

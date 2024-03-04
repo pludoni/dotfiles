@@ -3,3 +3,5 @@
 *.swp
 *.swo
 
+*.sql.gz
+vendor/assets/javascripts/locales

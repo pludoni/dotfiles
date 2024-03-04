@@ -2,43 +2,42 @@
 	st = status -sb
 	ci = commit
 	co = checkout
-  requests = fetch origin +refs/merge-requests/*:refs/merge-requests/*
-  unpushed = log origin/master..HEAD
-  tree = log --graph --oneline --all
-  loll = log --pretty=oneline --abbrev-commit --graph --decorate --all
-  lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  who = shortlog -s --
-  ll  = log --pretty=\"format:%Cred%h%Creset %s %Cgreen%an %Cblue%ar%Creset\" --no-merges
+	requests = fetch origin +refs/merge-requests/*:refs/merge-requests/*
+	unpushed = log origin/master..HEAD
+	tree = log --graph --oneline --all
+	loll = log --pretty=oneline --abbrev-commit --graph --decorate --all
+	lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	who = shortlog -s --
+	ll  = log --pretty=\"format:%Cred%h%Creset %s %Cgreen%an %Cblue%ar%Creset\" --no-merges
 	monsterpush = "!branch=`git rev-parse --abbrev-ref HEAD`; git push origin ${branch}:staging ${branch}:master"
 	monsterupdate = !git fetch origin && git merge origin/master && git merge origin/staging
-  railsupdate = "!git pull origin master && bundle && rake db:migrate && rake db:test:prepare"
-  overview = log --pretty=oneline --abbrev-commit --graph --decorate --all --simplify-by-decoration
+	railsupdate = "!git pull origin master && bundle && rake db:migrate && rake db:test:prepare"
+	overview = log --pretty=oneline --abbrev-commit --graph --decorate --all --simplify-by-decoration
 	today = log --since=midnight --author='Stefan Wienert' --oneline
 	g = grep --break --heading --line-number
-  todos = "!rg TODO `git  diff  --name-only -GTODO origin/master`"
-  rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
-  fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
+	todos = "!rg TODO `git  diff  --name-only -GTODO origin/master`"
+	rm-merged = !git branch --merged | grep -v '\\*' | egrep -v '^ *master *$' | xargs -n 1 git branch -d
+	fix = "!f() { ${EDITOR} `git diff --name-only --diff-filter=U`; }; f"
 	cane = commit --amend --no-edit
 	last = log -1 HEAD
 	pr = pull --rebase
-  dz = diff --color-moved=dimmed-zebra
-  prp = !git pull --rebase && git push
-  rebase-continue = "!git add -u && git rebase --continue"
-  acp = "!git add -u && git commit && git push"
+	dz = diff --color-moved=dimmed-zebra
+	prp = !git pull --rebase && git push
+	rebase-continue = "!git add -u && git rebase --continue"
+	acp = "!git add -u && git commit && git push"
 	root = rev-parse --show-toplevel
-  uncommited = "!nvim `git diff --name-only`"
-  rspec-changed = "!bundle exec rspec `git ls-files spec -m`"
-  rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
-  tidyup = "!git gc && git remote prune origin && git rm-merged"
-  rls = remote -v
-  find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
-  force-push-current = "!git push --force-with-lease origin \"$(git rev-parse --abbrev-ref HEAD)\""
-  branch-age = "!git for-each-ref --format='%(align:15,left)%(committerdate:relative)%(end) |  %(refname)' --sort -committerdate | sed 's/refs\\/\\(remotes\\|heads\\)\\///'"
-  b = "!git branch --all --sort=-committerdate --format='%(HEAD) %(align:18,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) - %(authorname))'"
-  addam = "!git add -u && git commit --amend"
-  testfix = "!git add -u && git commit -m Testfix && git push"
-  quickfix = "!git add -u && git commit -m Quickfix && git push"
-  big-commits ="!git rev-list --objects --all \
+	uncommited = "!nvim `git diff --name-only`"
+	rspec-changed = "!bundle exec rspec `git ls-files spec -m`"
+	rspec-uncommited = "!bundle exec rspec `git diff HEAD --name-only spec | grep _spec.rb`"
+	tidyup = "!git gc && git remote prune origin && git rm-merged"
+	rls = remote -v
+	force-push-current = "!git push --force-with-lease origin \"$(git rev-parse --abbrev-ref HEAD)\""
+	branch-age = "!git for-each-ref --format='%(align:15,left)%(committerdate:relative)%(end) |  %(refname)' --sort -committerdate | sed 's/refs\\/\\(remotes\\|heads\\)\\///'"
+	b = "!git branch --all --sort=-committerdate --format='%(HEAD) %(align:18,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) - %(authorname))'"
+	addam = "!git add -u && git commit --amend"
+	testfix = "!git add -u && git commit -m Testfix && git push"
+	quickfix = "!git add -u && git commit -m Quickfix && git push"
+	big-commits ="!git rev-list --objects --all \
     |git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
     |sed -n 's/^blob //p' \
     |sort --numeric-sort --key=2 \
@@ -51,22 +50,26 @@
 	interactive = auto
 	status = auto
 	ui = 1
-
 [user]
 	name = Stefan Wienert
 	email = info@stefanwienert.de
 
 [github]
 	user = zealot128
-
+[credential "https://git.pludoni.com"]
+	username = swi
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+[credential]
+	helper = cache --timeout=300
 [core]
 	excludesfile = ~/.gitignore
-
 [grep]
 	lineNumber = true
 	extendRegexp = true
 [push]
 	default = simple
+	autoSetupRemote = true
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
@@ -77,16 +80,23 @@
 	process = git-lfs filter-process
 
 [mergetool]
-  prompt = true
-  keepBackup = false
+	prompt = true
+	keepBackup = false
 [merge]
-  tool = vimdiff
-  ff = only
+	tool = vimdiff
+	ff = only
 [mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[safe]
+	directory = /home/pludoni/cli-tools/pltt
 [http]
 	postBuffer = 524288000
 [rebase]
 	instructionFormat = " %s (%an)"
 [rerere]
 	enabled = true
+
+[diff]
+	algorithm = histogram
+[branch]
+	sort = -committerdate
