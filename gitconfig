@@ -55,7 +55,6 @@
 [user]
 	name = Stefan Wienert
 	email = info@stefanwienert.de
-	;signingkey = C29FE67F
 
 [github]
 	user = zealot128
@@ -71,12 +70,6 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-[commit]
-;  gpgsign = true
-; [gpg]
-; 	program = gpg1
-[gpg]
- 	program = gpg
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f

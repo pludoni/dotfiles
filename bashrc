@@ -128,4 +128,4 @@ export RUBY_GC_MALLOC_LIMIT=79000000
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[ -f ~/.cargo/env ] && source ~/.cargo/env
