@@ -144,6 +144,15 @@ function Secupdate() {
   fi
 }
 
+function compressPDF() {
+  # create name $1.small.pdf
+  filename="${1%.pdf}.small.pdf"
+  fsize_before=$(du -h "$1" | cut -f1)
+  gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -r150  -sOutputFile="$filename" "$1"
+  fsize_after=$(du -h "$filename" | cut -f1)
+  echo "compresses to $filename.small.pdf from $fsize_before to $fsize_after"
+}
+
 function gem-cd() {
   cd `bundle show $1`
 }
