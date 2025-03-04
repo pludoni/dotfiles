@@ -89,6 +89,7 @@
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [safe]
 	directory = /home/pludoni/cli-tools/pltt
+	directory = /home/service/dev-setup
 [http]
 	postBuffer = 524288000
 [rebase]

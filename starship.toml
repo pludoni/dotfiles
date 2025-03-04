@@ -1,0 +1,88 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+[hostname]
+# disabled = true
+ssh_only = true
+format = '[$ssh_symbol$hostname]($style) '
+ssh_symbol = "@"
+style = "bold dimmed grey"
+
+[username]
+format = '[$user]($style)'
+style_user = "dimmed grey"
+
+[directory]
+truncation_length = 4
+truncate_to_repo = false
+
+[git_branch]
+truncation_length = 15
+
+[git_status]
+untracked = ""
+stashed = "STASHED"
+
+[battery]
+disabled = true
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "💀 "
+
+[nodejs]
+disabled = true
+
+[memory_usage]
+disabled = true
+threshold = -1
+symbol = " "
+style = "bold dimmed green"
+
+
+[ruby]
+disabled = true
+symbol = "🔺 "
+
+[custom.ssh_no_keys]
+description = "SSH missing keys"
+when = "ssh-add -l | grep -q 'no identities'"
+command = "echo 🚫"
+format = "$symbol[$output]($style) "
+shell = ["bash", "--noprofile", "--norc"]
+symbol = "🔑"
+style = "bold fg:red"
+
+[custom.ssh_keys]
+description = "SSH key count"
+when = "ssh-add -l | grep -v -q 'no identities'"
+command = "ssh-add -l | grep -v 'no identities' | wc -l"
+format = "$symbol[$output]($style) "
+shell = ["bash", "--noprofile", "--norc"]
+symbol = "🔑"
+style = "bold fg:green"
+
+[custom.primary_key_locked]
+description = "SSH key count"
+when = "! ssh-add -l | grep -v 'no identities' | egrep $HOME/.ssh/id_rsa"
+symbol = "§"
+style = "red"
+
+[custom.primary_key_unlocked]
+description = "SSH key count"
+when = "ssh-add -l | grep -v 'no identities' | egrep $HOME/.ssh/id_rsa"
+symbol = "§"
+style = "green"
+
+[custom.secondary_key_locked]
+description = "SSH key count"
+when = "! ssh-add -l | grep -v 'no identities' | egrep newmasterkey"
+symbol = "§"
+style = "red"
+
+[custom.secondary_key_unlocked]
+description = "SSH key count"
+when = "ssh-add -l | grep -v 'no identities' | egrep newmasterkey"
+symbol = "§"
+style = "green"
+
