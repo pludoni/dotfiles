@@ -1,10 +1,5 @@
 export TERM=xterm-256color
 
-# Initialize completion
-autoload -U +X bashcompinit && bashcompinit
-autoload -U +X compinit && compinit
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 HISTFILE=~/.zsh_history
@@ -17,8 +12,15 @@ setopt INC_APPEND_HISTORY
 # Emacs keybindings
 bindkey -e
 
-export GOPATH=$HOME/.golang
-export GOROOT=/usr/local/opt/go/libexec
+# check if ~/go exists
+if [ -d "$HOME/go" ]; then
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+fi
+if [ -d "/usr/local/opt/go/libexec" ]; then
+  export GOROOT=/usr/local/opt/go/libexec
+  export PATH=$PATH:$GOROOT/bin
+fi
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
@@ -75,5 +77,12 @@ function gcm() {
 
 eval "$(starship init zsh)"
 
-. $HOME/.asdf/asdf.sh
-. /home/swi/.asdf/completions/asdf.bash
+[[ -s $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
+
+export ASDF_DATA_DIR=/home/swi/.asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+
+# Initialize completion
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
